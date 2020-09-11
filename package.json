@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node src/index.js"
+    "start": "babel-node src/index.js",
+    "seed": "babel-node Data/ScriptDB.js"
   },
   "author": "Edgar Martinez",
   "license": "ISC",
