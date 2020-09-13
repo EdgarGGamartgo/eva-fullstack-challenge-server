@@ -10,19 +10,6 @@ client.connect((err) => {
         console.log('connection created');
     }
     const newDB = client.db("eva-fullstack-challenge-db");
-
-    newDB.createCollection("users"); 
-
-    newDB.collection('users').insertOne({
-        name: "Edgar",
-        email: "edgarggamartgo@gmail.com",
-        password: "edgartest"
-    }, (error, result) => {
-        if (error) {
-          return console.log('Unable to insert user')
-        }
-        console.log(result.ops)
-     })
     
     newDB.createCollection("bookings"); 
 
