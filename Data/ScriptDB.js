@@ -10,11 +10,36 @@ client.connect((err) => {
         console.log('connection created');
     }
     const newDB = client.db("eva-fullstack-challenge-db");
+
+    newDB.createCollection("users"); 
+
+    newDB.collection('users').insertOne({
+        name: "Edgar",
+        email: "edgarggamartgo@gmail.com",
+        password: "edgartest"
+    }, (error, result) => {
+        if (error) {
+          return console.log('Unable to insert user')
+        }
+        console.log(result.ops)
+     })
     
     newDB.createCollection("bookings"); 
 
     bookings.then(res => {
-        newDB.collection('bookings').insertMany(res, (error, result) => {
+        const bookingsData = res.map(booking => {
+         
+            return {
+             id: booking.id,
+             name: booking.name,
+             email: booking.email,
+             datetime: new Date(booking.datetime),
+             clinicName: booking.clinicName
+            }
+         
+            
+        }) 
+        newDB.collection('bookings').insertMany(bookingsData, (error, result) => {
            if (error) {
              return console.log('Unable to insert booking')
            }
