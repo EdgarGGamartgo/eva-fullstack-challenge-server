@@ -1,0 +1,147 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "eva-fullstack-challenge-server",
+        "description": "API for querying specific explorations based on mode, clinic and datetime criteria",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:4000",
+    "basePath": "/",
+    "tags": [{
+        "name": "Explorations",
+        "description": "API for explorations in the system"
+    }],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/api/explorations": {
+            "get": {
+                "tags": ["Explorations"],
+                "summary": "Get all explorations in system filtered by lax/strict mode, datetime and clinicName",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Exploration"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "X-ExplorationRequest",
+                        "in": "header",
+                        "description": "Lax/Strict mode, datetime and clinicName params to search explorations.",
+                        "required": true,
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/ExplorationRequest"
+                        }
+                      },
+                      {
+                        "name": "auth",
+                        "in": "header",
+                        "description": "Bearer token authentication.",
+                        "required": true,
+                        "type": "string"
+                      }
+                ] 
+                  
+            }
+        }
+    },
+    "definitions": {
+        "Exploration": {
+            "required": ["bookingId", "_id", "consumedMedications"],
+            "properties": {
+                "_id": {
+                    "type": "UUID",
+                    "uniqueItems": true
+                },
+                "bookingId": {
+                    "type": "string"
+                },
+                "consumedMedications": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "ExplorationRequest": {
+            "required": ["mode", "clinicName", "consumedMedications", "startDatetime", "endDatetime"],
+            "properties": {
+                "mode": {
+                    "type": "string"
+                },
+                "clinicName": {
+                    "type": "string"
+                },
+                "consumedMedications": {
+                    "type": "array",
+                    "items": { 
+                        "type": "string"
+                    }
+                },
+                "startDatetime": {
+                    "type": "object",
+                    "properties": {
+                        "startYYYY": {
+                            "type": "string"
+                        },
+                        "startMM": {
+                            "type": "string"
+                        },
+                        "startDD": {
+                            "type": "string"
+                        },
+                        "startHH": {
+                            "type": "string"
+                        },
+                        "startMm": {
+                            "type": "string"
+                        },
+                        "startSs": {
+                            "type": "string"
+                        },
+                        "startSss": {
+                            "type": "string"
+                        }
+                }
+            },
+            "endDatetime": {
+                "type": "object",
+                "properties": {
+                    "endYYYY": {
+                        "type": "string"
+                    },
+                    "endMM": {
+                        "type": "string"
+                    },
+                    "endDD": {
+                        "type": "string"
+                    },
+                    "endHH": {
+                        "type": "string"
+                    },
+                    "endMm": {
+                        "type": "string"
+                    },
+                    "endSs": {
+                        "type": "string"
+                    },
+                    "endSss": {
+                        "type": "string"
+                    }
+            }
+        }
+        }
+    }
+
+}
+}

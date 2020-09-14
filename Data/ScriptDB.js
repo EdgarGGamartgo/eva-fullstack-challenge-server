@@ -47,7 +47,6 @@ client.connect((err) => {
             if (error) {
               return console.log('Unable to insert exploration')
             }
-            console.log(result.ops)
          })
     }).catch(error => console.log(error))
 })
