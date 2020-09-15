@@ -7,3 +7,5 @@
 3. Use "npm start" command to run the project.
 
 4. Go to http://localhost:4000/api-docs/ to review endpoint documentation.
+
+5. Run "npm test" to run tests.
